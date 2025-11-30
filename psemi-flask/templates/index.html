@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1 class="my-4">Todo List</h1>
+
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <h2 class="card-title h4">Create New Task</h2>
+    <form action="/create" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label> 
+        <input type="text" name="title" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="details" class="form-label">Details</label>
+        <input type="text" name="details" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+{% for task in tasks %}
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <h2 class="card-title h5">{{ task.title }}</h2>
+        <p class="card-text">{{ task.details }}</p>
+        <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+        <a href="/update/{{ task.id }}" class="btn btn-secondary btn-sm">Update</a>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
